@@ -265,11 +265,31 @@ int XMLLesson(void)
 
 
   /* let the user pick the lesson script */
+  extern scriptType* curScript;
+  stop = 0;
   for (i = 0; i < num_scripts; i++)
   {
-    titles[i] = BlackOutline( script_filenames[i], DEFAULT_MENU_FONT_SIZE, &white );
-    select[i] = BlackOutline( script_filenames[i], DEFAULT_MENU_FONT_SIZE, &yellow);
+    if(settings.use_english)
+      sprintf(fn, "%s/scripts/%s", settings.default_data_path, script_filenames[i]);
+    else
+      sprintf(fn, "%s/scripts/%s", settings.theme_data_path, script_filenames[i]);
+    /**
+     * Loading all scripts is not a great idea, but the easiest to implement.
+     * Considering modern PCs, it should not cause noticeable slowness.
+    **/
+    if (load_script(fn) != 0)
+    {
+      stop++;
+      continue;
+    }
+    titles[i] = BlackOutline( curScript->pages->next->title, DEFAULT_MENU_FONT_SIZE, &white );
+    select[i] = BlackOutline( curScript->pages->next->title, DEFAULT_MENU_FONT_SIZE, &yellow);
+     close_script();
+     
   }
+  /* Return if we do not have any lessons to show */
+  if(stop == num_scripts - 1) return 0;
+  stop = 0;
 
   left = LoadImage("left.png", IMG_ALPHA);
   right = LoadImage("right.png", IMG_ALPHA);
