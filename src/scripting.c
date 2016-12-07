@@ -407,14 +407,16 @@ int XMLLesson(void)
           }
 
           if ((event.key.keysym.sym == SDLK_LEFT)
-           || (event.key.keysym.sym == SDLK_PAGEUP))
+           || (event.key.keysym.sym == SDLK_PAGEUP)
+           || (event.key.keysym.sym == SDLK_h))
           {
             if (loc - (loc % 8) - 8 >= 0)
               loc = loc - (loc % 8) - 8;
           }
 
           if ((event.key.keysym.sym == SDLK_RIGHT)
-           || (event.key.keysym.sym == SDLK_PAGEDOWN))
+           || (event.key.keysym.sym == SDLK_PAGEDOWN)
+           || (event.key.keysym.sym == SDLK_l))
           {
             if (loc - (loc % 8) + 8 < num_scripts)
               loc = (loc - (loc % 8) + 8);
