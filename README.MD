@@ -10,7 +10,8 @@ ___
 <F2>进入上一等级
 <F3>重置所有建筑为初始状态（作弊用）
 ___
-
+安装需要安装libsdl1.2的多个库,Ubuntu下建议使用sudo apt install libsdl-*-dev
+___
 
 NOTE - this document is reasonably correct but not completely current.
 It will updated as the maintainer's time allows - DSB
