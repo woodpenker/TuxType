@@ -92,6 +92,7 @@ int PlayCascade(int diflevel)
   int still_playing = 1;
   int playing_level = 1;
   int setup_new_level = 1;
+  int reset_play_level=0;
   int won_level = 0;
   int quitting = 0;
   int curlevel = 0;
@@ -200,7 +201,7 @@ int PlayCascade(int diflevel)
       {
         FreeBothBkgds();
       }
-
+	
       if (diflevel == INF_PRACT)
         sprintf(filename, "pract.png");
       else
@@ -234,14 +235,16 @@ int PlayCascade(int diflevel)
       }
 
       setup_new_level = 0;
-
+	  reset_play_level=0;
       LOG( "->>PLAYING THE GAME\n" );
 
     }
 
     /*  --------- Begin main game loop (cycles once per frame): ------------- */
 
-
+	if (!reset_play_level){
+		 playing_level=1;
+	}
     while (playing_level)
     {
       last_time = SDL_GetTicks();
@@ -272,7 +275,16 @@ int PlayCascade(int diflevel)
                 settings.o_lives = settings.o_lives - 10;
                 curlives = curlives - 10;
                 break;
-
+                
+			  case SDLK_F3://to add fish_left
+                fish_left++;
+                break;
+              case SDLK_F4://to decrease fish_left
+                if(fish_left>0) {
+					fish_left--;
+				}
+                break;
+                
               case SDLK_F7:
                 settings.o_lives = settings.o_lives + 10;
                 curlives = curlives + 10;

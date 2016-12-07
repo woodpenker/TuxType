@@ -175,7 +175,23 @@ int PlayLaserGame(int diff_level)
 
 				if (key == SDLK_ESCAPE)
 					paused = 1;
-
+					
+				if (key == SDLK_F1){ //to add level
+					wave++;
+					laser_reset_level(diff_level);
+				}
+				if (key == SDLK_F2){ //to decrease level
+					wave--;
+					laser_reset_level(diff_level);
+				}
+				if (key == SDLK_F3){ //to reset city
+				  for (i = 0; i < NUM_CITIES; i++)
+				  {
+					cities[i].alive = 1;
+					cities[i].expl = 0;
+					cities[i].shields = 1;
+				  }
+				}
 				/* --- eat other keys until level wait has passed --- */ 
 				if (level_start_wait > 0) 
 					key = SDLK_UNKNOWN;
